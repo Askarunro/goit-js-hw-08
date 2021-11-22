@@ -1,5 +1,7 @@
 import './sass/main.scss';
-// Описан в документации
-import SimpleLightbox from "simplelightbox";
+import './css/common.css';
+import './css/01-gallery.css';
+import './css/03-feedback.css';
+
 // Дополнительный импорт стилей
-import "simplelightbox/dist/simple-lightbox.min.css";
+import 'simplelightbox/dist/simple-lightbox.min.css';
