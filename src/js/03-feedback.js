@@ -1,3 +1,4 @@
+import throttle from 'lodash.throttle';
 import '../css/common.css';
 import '../css/01-gallery.css';
 import '../css/03-feedback.css';
@@ -14,16 +15,16 @@ refs.form.addEventListener('submit', onFormSubmit);
 populateTextarea();
 const formData = {};
 
-refs.form.addEventListener('input', evt => {
+refs.form.addEventListener('input', throttle(onFormInput, 500));
+function onFormInput(evt) {
   formData[evt.target.name] = evt.target.value;
-  console.log(formData);
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-});
-
+}
 function onFormSubmit(evt) {
   evt.preventDefault();
   evt.currentTarget.reset();
   localStorage.removeItem('feedback-form-state');
+  console.log(formData);
 }
 
 // function onTextareaInput(evt) {
