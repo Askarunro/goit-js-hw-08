@@ -13,18 +13,26 @@ refs.form.addEventListener('submit', onFormSubmit);
 // refs.input.addEventListener('input', onInputInput);
 // refs.textarea.addEventListener('input', onTextareaInput);
 populateTextarea();
-const formData = {};
+let formData = {};
 
-refs.form.addEventListener('input', throttle(onFormInput, 500));
+
+
+if(localStorage.getItem('feedback-form-state')){ 
+    populateTextarea();
+    refs.form.addEventListener('input', throttle(onFormInput, 500))
+  }
+  else{refs.form.addEventListener('input', throttle(onFormInput, 500));}
+
 function onFormInput(evt) {
-  formData[evt.target.name] = evt.target.value;
-  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+ formData[evt.target.name] = evt.target.value;
+  console.log(formData)
+  localStorage.setItem('feedback-form-state', JSON.stringify(formData))
 }
+
 function onFormSubmit(evt) {
   evt.preventDefault();
   evt.currentTarget.reset();
   localStorage.removeItem('feedback-form-state');
-  console.log(formData);
 }
 
 // function onTextareaInput(evt) {
@@ -38,6 +46,6 @@ function populateTextarea() {
   if (savedMessage) {
     const dataNew = JSON.parse(savedMessage);
     refs.input.value = dataNew.email;
-    refs.textarea.value = dataNew.message;
+    refs.textarea.value = dataNew.message
   }
 }
