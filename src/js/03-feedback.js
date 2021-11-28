@@ -75,12 +75,9 @@ function onInputInput(evt) {
 
 function populateTextarea() {
   const savedMessage = localStorage.getItem('feedback-form-state');
-  // console.log('hi')
   const savedMessage2 = localStorage.getItem('feedback-form-state-email');
-  if (savedMessage && savedMessage2) {
-    // const dataNew = JSON.parse(savedMessage);
+  if (savedMessage || savedMessage2) {
     refs.input.value = savedMessage2;
-    // console.log(savedMessage2)
     refs.textarea.value = savedMessage;
   }
 }
